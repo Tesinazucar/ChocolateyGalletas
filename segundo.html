@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Profesional: Administración de Usuarios en Linux | TeyGalletas</title>
+    <meta name="description" content="Guía técnica completa para la creación y gestión de usuarios en sistemas Linux/Unix con mejores prácticas de seguridad">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #bb7eb6;
+            --secondary: #db34d3;
+            --accent: #e73cd0;
+            --light: #ecf0f1;
+            --dark: #5d345e;
+            --success: #771277;
+            --warning: #c041d1;
+            --info: #b929b2;
+            --text: #333;
+            --text-light: #132a8f;
+            --border: #e969e2;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background-color: #f5dff2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .breadcrumb a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        article {
+            background: rgb(250, 241, 249);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+        }
+        
+        aside {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            align-self: start;
+            position: sticky;
+            top: 20px;
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            color: var(--dark);
+            margin-top: 2.5rem;
+            font-size: 1.6rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin-top: 2rem;
+            font-size: 1.3rem;
+        }
+        
+        .meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .meta-item i {
+            color: var(--secondary);
+        }
+        
+        .toc {
+            margin-bottom: 2rem;
+        }
+        
+        .toc-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            padding: 0.3rem 0;
+        }
+        
+        .toc a:hover {
+            color: var(--secondary);
+        }
+        
+        .toc li.active a {
+            color: var(--secondary);
+            font-weight: 500;
+            border-left: 3px solid var(--secondary);
+            padding-left: 10px;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .alert-warning {
+            background-color: rgba(236, 18, 243, 0.1);
+            border-color: var(--warning);
+            color: #8a6d3b;
+        }
+        
+        .alert-danger {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-color: var(--accent);
+            color: #a94442;
+        }
+        
+        .alert-info {
+            background-color: rgba(41, 128, 185, 0.1);
+            border-color: var(--info);
+            color: #87318f;
+        }
+        
+        .alert-success {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: var(--success);
+            color: #763c76;
+        }
+        
+        .terminal {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 1.2rem;
+            border-radius: 6px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .terminal .prompt {
+            color: var(--success);
+        }
+        
+        .terminal .command {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .terminal .comment {
+            color: #a695a5;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column a {
+            color: #c6bdc7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">SysAdmin<span>Pro</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Tutoriales</a></li>
+                    <li><a href="#">Documentación</a></li>
+                    <li><a href="#">Comunidad</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="#">Inicio</a> &raquo; <a href="#">Tutoriales</a> &raquo; <a href="#">Linux</a> &raquo; Administración de Usuarios
+        </div>
+        
+        <div class="main-content">
+            <article>
+                <h1>Guía Profesional: Creación y Gestión de Usuarios en Linux</h1>
+                
+                <div class="meta">
+                    <div class="meta-item">
+                        <i>📅</i> Actualizado: 28/03/2025
+                    </div>
+                    <div class="meta-item">
+                        <i>⏱️</i> Tiempo de lectura: 8 min
+                    </div>
+                    <div class="meta-item">
+                        <i>🏷️</i> Tags: Linux, SysAdmin, Seguridad, Usuarios
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <strong>Nota para administradores:</strong> Este artículo asume que tiene privilegios de root o sudo en el sistema. Todas las operaciones deben realizarse con las debidas precauciones de seguridad.
+                </div>
+                
+                <h2>Introducción</h2>
+                <p>La administración de usuarios es una de las tareas fundamentales en la gestión de sistemas Linux. Un esquema de usuarios bien diseñado mejora la seguridad, facilita la auditoría y permite una gestión de permisos eficiente. En esta guía profesional, cubriremos:</p>
+                <ul>
+                    <li>Creación básica de usuarios</li>
+                    <li>Opciones avanzadas de configuración</li>
+                    <li>Mejores prácticas de seguridad</li>
+                    <li>Gestión de grupos y permisos</li>
+                    <li>Automatización del proceso</li>
+                </ul>
+                
+                <h2>1. Creación Básica de Usuarios</h2>
+                
+                <h3>1.1. Uso del comando <code>adduser</code></h3>
+                <p>El método recomendado para la mayoría de distribuciones modernas es el comando <code>adduser</code>, que ofrece un asistente interactivo:</p>
+                
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">adduser nuevo_usuario</span><br>
+                    Adding user `nuevo_usuario' ...<br>
+                    Adding new group `nuevo_usuario' (1001) ...<br>
+                    Adding new user `nuevo_usuario' (1001) with group `nuevo_usuario' ...<br>
+                    Creating home directory `/home/nuevo_usuario' ...<br>
+                    Copying files from `/etc/skel' ...<br>
+                    New password: <br>
+                    Retype new password: <br>
+                    passwd: password updated successfully<br>
+                    Changing the user information for nuevo_usuario<br>
+                    Enter the new value, or press ENTER for the default<br>
+                    <span class="comment">        Full Name []: </span><br>
+                    <span class="comment">        Room Number []: </span><br>
+                    <span class="comment">        Work Phone []: </span><br>
+                    <span class="comment">        Home Phone []: </span><br>
+                    <span class="comment">        Other []: </span><br>
+                    Is the information correct? [Y/n] Y
+                </div>
+                
+                <div class="alert alert-success">
+                    <strong>Mejor práctica:</strong> <code>adduser</code> es preferible a <code>useradd</code> en sistemas Debian/Ubuntu porque automatiza la creación del directorio home, copia los archivos de <code>/etc/skel</code>, y configura el shell por defecto correctamente.
+                </div>
+                
+                <h3>1.2. Verificación del usuario creado</h3>
+                <p>Para confirmar que el usuario fue creado correctamente:</p>
+                
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">id nuevo_usuario</span><br>
+                    uid=1001(nuevo_usuario) gid=1001(nuevo_usuario) groups=1001(nuevo_usuario)<br><br>
+                    
+                    <span class="prompt">root@server:~# </span><span class="command">ls -ld /home/nuevo_usuario</span><br>
+                    drwxr-xr-x 2 nuevo_usuario nuevo_usuario 4096 Mar 28 10:15 /home/nuevo_usuario
+                </div>
+                
+                <h2>2. Creación Avanzada con <code>useradd</code></h2>
+                <p>Para mayor control sobre los parámetros del usuario, podemos usar <code>useradd</code> con opciones específicas:</p>
+                
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">useradd -m -d /home/usuario_pro -s /bin/bash -c "Usuario Profesional" -G developers,sysadmin usuario_pro</span>
+                </div>
+                
+                <p>Opciones utilizadas:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Opción</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>-m</code></td>
+                            <td>Crea el directorio home del usuario</td>
+                        </tr>
+                        <tr>
+                            <td><code>-d</code></td>
+                            <td>Especifica la ruta del directorio home</td>
+                        </tr>
+                        <tr>
+                            <td><code>-s</code></td>
+                            <td>Define el shell por defecto</td>
+                        </tr>
+                        <tr>
+                            <td><code>-c</code></td>
+                            <td>Agrega un comentario/descripción</td>
+                        </tr>
+                        <tr>
+                            <td><code>-G</code></td>
+                            <td>Agrega el usuario a grupos secundarios</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="alert alert-warning">
+                    <strong>Importante:</strong> Al usar <code>useradd</code>, debes establecer manualmente la contraseña con <code>passwd usuario_pro</code> para que el usuario pueda autenticarse.
+                </div>
+                
+                <h2>3. Configuración de Contraseñas Seguras</h2>
+                <p>La política de contraseñas es crítica para la seguridad del sistema. Recomendamos:</p>
+                
+                <h3>3.1. Establecer contraseña con <code>passwd</code></h3>
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">passwd usuario_pro</span><br>
+                    New password: <br>
+                    Retype new password: <br>
+                    passwd: password updated successfully
+                </div>
+                
+                <h3>3.2. Configurar expiración de contraseña</h3>
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">chage -M 90 -W 7 usuario_pro</span><br>
+                    <span class="comment"># Obliga a cambiar la contraseña cada 90 días con aviso 7 días antes</span>
+                </div>
+                
+                <h3>3.3. Verificar políticas de contraseña</h3>
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">chage -l usuario_pro</span><br>
+                    Last password change                                    : Mar 28, 2025<br>
+                    Password expires                                    : Jun 26, 2025<br>
+                    Password inactive                                    : never<br>
+                    Account expires                                        : never<br>
+                    Minimum number of days between password change        : 0<br>
+                    Maximum number of days between password change        : 90<br>
+                    Number of days of warning before password expires    : 7
+                </div>
+                
+                <h2>4. Gestión de Grupos y Permisos</h2>
+                <p>La organización en grupos facilita la administración de permisos:</p>
+                
+                <div class="terminal">
+                    <span class="prompt">root@server:~# </span><span class="command">groupadd developers</span><br>
+                    <span class="prompt">root@server:~# </span><span class="command">usermod -aG developers usuario_pro</span><br>
+                    <span class="comment"># -a para append (no quitar otros grupos), -G para grupos secundarios</span><br><br>
+                    
+                    <span class="prompt">root@server:~# </span><span class="command">groups usuario_pro</span><br>
+                    usuario_pro : usuario_pro developers sysadmin
+                </div>
+                
+                <h2>5. Automatización con Scripts</h2>
+                <p>Para entornos con muchos usuarios, podemos crear scripts de creación:</p>
+                
+                <div class="code-block">
+                    #!/bin/bash<br>
+                    <br>
+                    # Script para creación masiva de usuarios<br>
+                    USER_LIST="usuario1 usuario2 usuario3"<br>
+                    DEFAULT_GROUP="developers"<br>
+                    <br>
+                    for USER in $USER_LIST; do<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;useradd -m -s /bin/bash -G $DEFAULT_GROUP $USER<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;echo "$USER:Password123!" | chpasswd<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;chage -d 0 $USER # Forzar cambio de contraseña en primer login<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;mkdir -p /home/$USER/.ssh<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;chmod 700 /home/$USER/.ssh<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;chown $USER:$USER /home/$USER/.ssh<br>
+                    done
+                </div>
+                
+                <div class="alert alert-danger">
+                    <strong>Advertencia de seguridad:</strong> El ejemplo anterior usa contraseñas en texto plano solo con fines demostrativos. En producción, use SSH keys o implemente un sistema seguro de distribución de contraseñas.
+                </div>
+                
+                <h2>Conclusión</h2>
+                <p>La creación y gestión adecuada de usuarios es fundamental para la seguridad y eficiencia de los sistemas Linux. Recuerde:</p>
+                <ul>
+                    <li>Siempre seguir el principio de mínimo privilegio</li>
+                    <li>Implementar políticas de contraseñas robustas</li>
+                    <li>Organizar usuarios en grupos lógicos</li>
+                    <li>Documentar todos los cambios</li>
+                    <li>Auditar regularmente las cuentas de usuario</li>
+                </ul>
+                
+                <div class="btn-group">
+                    <a href="#" class="btn">Descargar PDF</a>
+                    <a href="#" class="btn btn-outline">Compartir Tutorial</a>
+                </div>
+            </article>
+            
+            <aside>
+                <div class="toc">
+                    <div class="toc-title">Contenido</div>
+                    <ul>
+                        <li class="active"><a href="#">Introducción</a></li>
+                        <li><a href="#">1. Creación Básica</a></li>
+                        <li><a href="#">2. Creación Avanzada</a></li>
+                        <li><a href="#">3. Contraseñas Seguras</a></li>
+                        <li><a href="#">4. Gestión de Grupos</a></li>
+                        <li><a href="#">5. Automatización</a></li>
+                        <li><a href="#">Conclusión</a></li>
+                    </ul>
+                </div>
+                
+                <div class="toc">
+                    <div class="toc-title">Recursos Relacionados</div>
+                    <ul>
+                        <li><a href="#">Gestión de Permisos en Linux</a></li>
+                        <li><a href="#">Seguridad Básica en Servidores</a></li>
+                        <li><a href="#">Automatización con Bash</a></li>
+                        <li><a href="#">LDAP para Gestión Centralizada</a></li>
+                    </ul>
+                </div>
+                
+                <div class="toc">
+                    <div class="toc-title">Comandos Clave</div>
+                    <ul>
+                        <li><code>adduser</code></li>
+                        <li><code>useradd</code></li>
+                        <li><code>usermod</code></li>
+                        <li><code>passwd</code></li>
+                        <li><code>chage</code></li>
+                        <li><code>groupadd</code></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SysAdmin Pro</h3>
+                    <p>Recursos profesionales para administradores de sistemas y DevOps.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#">Tutoriales</a></li>
+                        <li><a href="#">Cheatsheets</a></li>
+                        <li><a href="#">Herramientas</a></li>
+                        <li><a href="#">Foro</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Términos de uso</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 SysAdmin Pro. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
