@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Té y galletas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #f3bdf0;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+            animation: balanceo 3s ease-in-out infinite;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #af4ca7;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            animation: titileo 2s infinite;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            border-radius: 0 0 8px 8px;
+        }
+        .highlight {
+            background-color: #ffe7fe;
+            padding: 15px;
+            border-left: 4px solid #cc7bb1;
+        }
+        .btn-imagen {
+            background-color: #af4ca7;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-imagen:hover {
+            background-color: #8d3a87;
+            transform: scale(1.05);
+        }
+        .btn-imagen:active {
+            transform: scale(0.95);
+        }
+        .btn-imagen::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        .btn-imagen:focus:not(:active)::after {
+            animation: efectoClick 0.8s ease-out;
+        }
+        #imagen-container {
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #imagen-container.mostrar {
+            display: block;
+            opacity: 1;
+        }
+        #imagen-te {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        #imagen-te:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Animaciones */
+        @keyframes balanceo {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+        
+        @keyframes titileo {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes efectoClick {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Holii</h1>
+        <p>Bienvenido a mi primera página web</p>
+    </header>
+
+    <section>
+        <h2>Sobre Mí</h2>
+        <p>Hola, soy Te y esta es mi primera página web. Estoy aprendiendo desarrollo web y quería compartir este pequeño proyecto contigo.</p>
+        
+        <div class="highlight">
+            <p>¿Sabías que "Hola Mundo" es normalmente el primer programa que escribe cualquier desarrollador cuando aprende un nuevo lenguaje?</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Gustos</h2>
+        <p>Me apasiona la tecnología y el aprendizaje continuo. Algunos de mis intereses incluyen:</p>
+        <ul>
+            <li>Programación de videojuegos</li>
+            <li>Desarrollo web</li>
+            <li>Amo Deepseek</li>
+            <li>Dulces</li>
+        </ul>
+        
+        <!-- Botón para mostrar imagen -->
+        <button class="btn-imagen" id="btnMostrarImagen">Click!</button>
+        
+        <!-- Contenedor de la imagen (inicialmente oculto) -->
+        <div id="imagen-container">
+            <img id="imagen-te" src="https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Té y galletas">
+            <p>Te sin azúcar!</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Contacto</h2>
+        <p>Si quieres saber más sobre mi trabajo o quieres colaborar en algún proyecto, no dudes en contactarme:</p>
+        <p>Email: <a href="mailto:esthergg.1259@gmail.com">esthergg.1259@gmail.com</a></p>
+    </section>
+
+    <footer>
+        <p>© 2025 - Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        // JavaScript para mostrar/ocultar la imagen con transición
+        document.getElementById("btnMostrarImagen").addEventListener("click", function() {
+            const imagenContainer = document.getElementById("imagen-container");
+            if (imagenContainer.classList.contains("mostrar")) {
+                imagenContainer.classList.remove("mostrar");
+                setTimeout(() => {
+                    imagenContainer.style.display = "none";
+                }, 500); // Espera a que termine la transición de opacidad
+                this.textContent = "Click!";
+            } else {
+                imagenContainer.style.display = "block";
+                setTimeout(() => {
+                    imagenContainer.classList.add("mostrar");
+                }, 10);
+                this.textContent = "Ocultar imagen";
+            }
+        });
+    </script>
+</body>
+</html>
