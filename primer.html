@@ -1,200 +1,384 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Té y galletas</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
+    <title>Primera</title>
+<style>
+    body {
+      background-color: rgb(243, 228, 245);
+        font-family: open sans, sans-serif;
+background-image: url('https://static.https://wallpapers.com/images/hd/solid-light-purple-byblfdqa1zbhngf9.jpg.com/system/resources/previews/002/701/701/non_2x/light-purple-background-with-rectangles-colorful-illustration-with-gradient-rectangles-and-squares-pattern-for-websites-landing-pages-vector.jpg');
+        background-size: cover; 
+        background-attachment: fixed; 
+        color: rgb(80, 50, 100); 
+        padding-top: 50px; /* Ajusta el contenido para que no quede debajo de la barra */
+    }
+    h1,h2 {
+      padding: 10px;
+      border-radius: 10px;
+      border: 10px solid rgb(221, 205, 223);
+    }
+    h1 {
+        font-size: 30px;
+        color: rgb(174, 101, 184);
+        text-align: center;
+        border-bottom: 20px solid rgb(191, 154, 196);
+        text-shadow: 0px 0px 10px rgb(191, 154, 196);
+        background-color: rgb(251, 223, 255);
         }
-        header {
-            background-color: #f3bdf0;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-            margin-bottom: 20px;
-            animation: balanceo 3s ease-in-out infinite;
+       h2 {
+        font-size: 25px;
+        color: rgb(174, 101, 184);
+        text-align: center;
+        padding: 5px;
+        border-bottom: 20px solid rgb(191, 154, 196);
+        text-shadow: 0px 0px 10px rgb(191, 154, 196);
+        background-color: rgb(251, 223, 255);
+        margin-top: 250px;
         }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
+         h3 {
+        font-size: 18px;
+        color: rgb(120, 80, 140);
+        text-align: left;
+        padding: 5px;
+        border-bottom: 10px solid rgb(191, 154, 196);
+        border-radius: 5px;
+        text-shadow: 0px 0px 5px rgb(191, 154, 196);
+        background-color: rgb(251, 223, 255);
         }
-        section {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #af4ca7;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            animation: titileo 2s infinite;
-        }
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #333;
-            color: white;
-            border-radius: 0 0 8px 8px;
-        }
-        .highlight {
-            background-color: #ffe7fe;
-            padding: 15px;
-            border-left: 4px solid #cc7bb1;
-        }
-        .btn-imagen {
-            background-color: #af4ca7;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        p {
             font-size: 16px;
-            margin: 10px 0;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-imagen:hover {
-            background-color: #8d3a87;
-            transform: scale(1.05);
-        }
-        .btn-imagen:active {
-            transform: scale(0.95);
-        }
-        .btn-imagen::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        .btn-imagen:focus:not(:active)::after {
-            animation: efectoClick 0.8s ease-out;
-        }
-        #imagen-container {
+            color: rgb(120, 80, 140);
+            margin-top: 20px;
+            margin-bottom: 20px;
             text-align: center;
-            margin: 20px 0;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
         }
-        #imagen-container.mostrar {
-            display: block;
-            opacity: 1;
+        ol {
+            list-style-type: decimal;
+            margin-left: 20px;
         }
-        #imagen-te {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: rgb(120, 80, 140);
+            text-align: left;
+            font-family: Georgia, 'Times New Roman', Times, serif;
         }
-        #imagen-te:hover {
-            transform: scale(1.02);
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 40px;
+            margin-top: 20px;
+
         }
-        
-        /* Animaciones */
-        @keyframes balanceo {
-            0%, 100% { transform: rotate(-1deg); }
-            50% { transform: rotate(1deg); }
+        button, li {
+            transition: all 0.3s ease-in-out;
         }
-        
-        @keyframes titileo {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        button:hover, li:hover {
+            transform: scale(1.05); 
+            background-color: rgb(221, 205, 223); 
         }
-        
-        @keyframes efectoClick {
-            0% {
-                transform: scale(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
+        a {
+            color: rgb(174, 101, 184); /* Cambia el color de los enlaces a morado */
+            text-decoration: none; /* Opcional: elimina el subrayado */
         }
-    </style>
+
+        a:hover {
+            color: rgb(120, 80, 140); /* Cambia el color al pasar el mouse */
+            text-decoration: underline; /* Opcional: añade subrayado al pasar el mouse */
+        }
+
+    header {
+        background-color: rgb(251, 223, 255); /* Fondo suave */
+        color: rgb(80, 50, 100); /* Color del texto */
+        text-align: center; /* Centra el contenido */
+        padding: 20px; /* Espaciado interno */
+        border-bottom: 5px solid rgb(191, 154, 196); /* Línea inferior */
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+    }
+
+    header h1 {
+        font-size: 36px; /* Tamaño del título */
+        font-family: 'Dancing Script', cursive; /* Fuente decorativa */
+        margin: 0; /* Elimina márgenes */
+    }
+
+    header p {
+        font-size: 18px; /* Tamaño del subtítulo */
+        font-family: 'Roboto', sans-serif; /* Fuente secundaria */
+        margin: 5px 0 0 0; /* Espaciado superior */
+    }
+
+.comments {
+    background-color: rgb(251, 223, 255);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+.comments p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: rgb(80, 50, 100);
+}
+.comments p strong {
+    color: rgb(174, 101, 184);
+}
+
+/* Estilo para la sección de comentarios */
+section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgb(243, 228, 245);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la sección */
+section h2 {
+    text-align: center;
+    color: rgb(120, 80, 140);
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los comentarios existentes */
+.comments {
+    background-color: rgb(251, 223, 255);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+.comments p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: rgb(80, 50, 100);
+}
+.comments p strong {
+    color: rgb(174, 101, 184);
+}
+
+/* Estilo para el formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+form label {
+    font-size: 16px;
+    color: rgb(80, 50, 100);
+}
+form textarea {
+    padding: 10px;
+    border: 1px solid rgb(191, 154, 196);
+    border-radius: 5px;
+    resize: none;
+    font-family: 'Roboto', sans-serif;
+}
+form textarea::placeholder {
+    color: rgb(174, 101, 184);
+    font-style: italic;
+}
+
+/* Botón de enviar */
+form button {
+    background-color: rgb(174, 101, 184);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+form button:hover {
+    background-color: rgb(120, 80, 140);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(251, 223, 255);
+    padding: 10px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    text-decoration: none;
+    color: rgb(120, 80, 140);
+    font-weight: bold;
+}
+nav a:hover {
+    color: rgb(174, 101, 184);
+}
+
+ul, ol {
+    background-color: rgb(243, 228, 245);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: rgb(120, 80, 140);
+    transition: transform 0.3s ease-in-out;
+}
+li:hover {
+    transform: scale(1.05);
+    background-color: rgb(221, 205, 223);
+}
+footer {
+    background-color: rgb(221, 205, 223);
+    color: rgb(80, 50, 100);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 5px solid rgb(191, 154, 196);
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+}
+footer a {
+    color: rgb(174, 101, 184);
+    text-decoration: none;
+}
+footer a:hover {
+    color: rgb(120, 80, 140);
+    text-decoration: underline;
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Holii</h1>
-        <p>Bienvenido a mi primera página web</p>
-    </header>
+<nav>
+    <ul>
+        <li><a href="#magdalenas">Magdalenas</a></li>
+        <li><a href="#galletas">Galletas</a></li>
+        <li><a href="#bizcochos">Bizcochos</a></li>
+        <li><a href="#comentarios">Comentarios</a></li>
+    </ul>
+</nav>
+<header>
+    <h1>Recetas Simples</h1>
+    <p>¡Nuevas recetas pronto!</p>
+</header>   
+<p>En esta página encontrarás recetas de postres fáciles y deliciosos. ¡Disfruta cocinando!</p>
+<p>¡Espero que disfrutes de estas recetas!</p>
 
-    <section>
-        <h2>Sobre Mí</h2>
-        <p>Hola, soy Te y esta es mi primera página web. Estoy aprendiendo desarrollo web y quería compartir este pequeño proyecto contigo.</p>
-        
-        <div class="highlight">
-            <p>¿Sabías que "Hola Mundo" es normalmente el primer programa que escribe cualquier desarrollador cuando aprende un nuevo lenguaje?</p>
-        </div>
-    </section>
+<!-- Sección Magdalenas -->
+<h2 id="magdalenas">Magdalenas</h2>
+<p>12 Magdalenas medianas</p>
+<h3>Ingredientes:</h3>
+<ul>
+    <li>2 huevos</li>
+    <li>1 taza de azúcar (200g)</li>
+    <li>½ taza de aceite de girasol o mantequilla derretida (120ml)</li>
+    <li>1 taza de leche (250ml)</li>
+    <li>2 tazas de harina (250g)</li>
+    <li>½ taza de cacao en polvo sin azúcar (50g)</li>
+    <li>1 cucharadita de esencia de vainilla</li>
+    <li>1 cucharadita de levadura (polvo de hornear)</li>
+    <li>Una pizca de sal</li>
+    <li>Chips de chocolate o trocitos de chocolate (opcional)</li>
+</ul>
+<h3>Preparación:</h3>
+<ol>
+    <li>Precalentar el horno a 180°C (350°F).</li>
+    <li>En un bol grande, batir los huevos y el azúcar hasta que estén bien mezclados.</li>
+    <li>Agregar el aceite y la leche, y mezclar nuevamente.</li>
+    <li>En otro bol, mezclar la harina, el cacao, la levadura y la sal.</li>
+    <li>Incorporar los ingredientes secos a la mezcla húmeda y mezclar hasta que estén bien combinados.</li>
+    <li>Si lo deseas, añadir chips de chocolate a la mezcla.</li>
+    <li>Verter la mezcla en moldes para magdalenas llenándolos hasta 2/3 de su capacidad.</li>
+    <li>Hornear durante 15-20 minutos o hasta que al insertar un palillo en el centro salga limpio.</li>
+    <li>Dejar enfriar antes de desmoldar.</li>
+    <li>¡Disfrutar de tus magdalenas!</li>
+</ol>
 
-    <section>
-        <h2>Gustos</h2>
-        <p>Me apasiona la tecnología y el aprendizaje continuo. Algunos de mis intereses incluyen:</p>
-        <ul>
-            <li>Programación de videojuegos</li>
-            <li>Desarrollo web</li>
-            <li>Amo Deepseek</li>
-            <li>Dulces</li>
-        </ul>
-        
-        <!-- Botón para mostrar imagen -->
-        <button class="btn-imagen" id="btnMostrarImagen">Click!</button>
-        
-        <!-- Contenedor de la imagen (inicialmente oculto) -->
-        <div id="imagen-container">
-            <img id="imagen-te" src="https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Té y galletas">
-            <p>Te sin azúcar!</p>
-        </div>
-    </section>
+<!-- Sección Galletas -->
+<h2 id="galletas">Galletas</h2>
+<p>24 Galletas medianas</p>
+<h3>Ingredientes:</h3>
+<ul>
+    <li>1 taza de mantequilla (225g), a temperatura ambiente</li>
+    <li>1 taza de azúcar (200g)</li>
+    <li>1 taza de azúcar moreno (200g)</li>
+    <li>2 huevos</li>
+    <li>2 cucharaditas de esencia de vainilla</li>
+    <li>3 tazas de harina (375g)</li>
+    <li>1 cucharadita de bicarbonato de sodio</li>
+    <li>1 cucharadita de sal</li>
+    <li>1 taza de chips de chocolate o trocitos de chocolate (opcional)</li>
+</ul>
+<h3>Preparación:</h3>
+<ol>
+    <li>Precalentar el horno a 180°C (350°F).</li>
+    <li>En un bol grande, batir la mantequilla, el azúcar y el azúcar moreno hasta obtener una mezcla cremosa.</li>
+    <li>Añadir los huevos y la esencia de vainilla, y mezclar bien.</li>
+    <li>En otro bol, mezclar la harina, el bicarbonato de sodio y la sal.</li>
+    <li>Incorporar los ingredientes secos a la mezcla húmeda y mezclar hasta que estén bien combinados.</li>
+    <li>Si lo deseas, añadir los chips de chocolate a la mezcla.</li>
+    <li>Formar bolitas con la masa y colocarlas en una bandeja para hornear cubierta con papel de horno, dejando espacio entre cada una.</li>
+    <li>Hornear durante 10-12 minutos o hasta que los bordes estén ligeramente dorados.</li>
+    <li>Dejar enfriar en la bandeja durante unos minutos antes de transferirlas a una rejilla para que se enfríen completamente.</li>
+    <li>¡Disfrutar de tus galletas caseras!</li>
+</ol>
 
-    <section>
-        <h2>Contacto</h2>
-        <p>Si quieres saber más sobre mi trabajo o quieres colaborar en algún proyecto, no dudes en contactarme:</p>
-        <p>Email: <a href="mailto:esthergg.1259@gmail.com">esthergg.1259@gmail.com</a></p>
-    </section>
+<!-- Sección Bizcochos -->
+<h2 id="bizcochos">Bizcochos</h2>
+<p>1 Bizcocho grande</p>
+<h3>Ingredientes:</h3>
+<ul>
+    <li>4 huevos</li>
+    <li>1 taza de azúcar (200g)</li>
+    <li>½ taza de aceite de girasol o mantequilla derretida (120ml)</li>
+    <li>1 taza de leche (250ml)</li>
+    <li>2 tazas de harina (250g)</li>
+    <li>1 cucharadita de esencia de vainilla</li>
+    <li>1 cucharadita de levadura (polvo de hornear)</li>
+    <li>Una pizca de sal</li>
+    <li>Ralladura de limón o naranja (opcional)</li>
+</ul>
+<h3>Preparación:</h3>
+<ol>
+    <li>Precalentar el horno a 180°C (350°F).</li>
+    <li>En un bol grande, batir los huevos y el azúcar hasta que la mezcla esté espumosa y de color claro.</li>
+    <li>Añadir el aceite, la leche y la esencia de vainilla, y mezclar bien.</li>
+    <li>En otro bol, mezclar la harina, la levadura y la sal.</li>
+    <li>Incorporar los ingredientes secos a la mezcla húmeda poco a poco, mezclando hasta que no queden grumos.</li>
+    <li>Si lo deseas, añadir la ralladura de limón o naranja para darle un toque cítrico.</li>
+    <li>Verter la mezcla en un molde para bizcocho previamente engrasado y enharinado.</li>
+    <li>Hornear durante 30-40 minutos o hasta que al insertar un palillo en el centro salga limpio.</li>
+    <li>Dejar enfriar antes de desmoldar.</li>
+    <li>¡Disfrutar de tu bizcocho casero!</li>
+</ol>
 
-    <footer>
-        <p>© 2025 - Todos los derechos reservados</p>
-    </footer>
+<section id="comentarios">
+    <h2>Comentarios</h2>
+    <div class="comments">
+    </div>
+    <form action="#" method="post">
+        <label for="comment">Deja tu comentario:</label>
+        <textarea id="comment" name="comment" rows="3" placeholder="Escribe tu comentario aquí..." required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</section>
 
-    <script>
-        // JavaScript para mostrar/ocultar la imagen con transición
-        document.getElementById("btnMostrarImagen").addEventListener("click", function() {
-            const imagenContainer = document.getElementById("imagen-container");
-            if (imagenContainer.classList.contains("mostrar")) {
-                imagenContainer.classList.remove("mostrar");
-                setTimeout(() => {
-                    imagenContainer.style.display = "none";
-                }, 500); // Espera a que termine la transición de opacidad
-                this.textContent = "Click!";
-            } else {
-                imagenContainer.style.display = "block";
-                setTimeout(() => {
-                    imagenContainer.classList.add("mostrar");
-                }, 10);
-                this.textContent = "Ocultar imagen";
-            }
-        });
+<footer>
+    <p>© 2025. Todos los derechos reservados.</p>
+    <p>Diseñado por Tesinazucar</p>
+</footer>
+
+</body>
+</html>
     </script>
 </body>
 </html>
